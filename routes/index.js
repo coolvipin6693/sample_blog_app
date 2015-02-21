@@ -25,7 +25,7 @@ module.exports = function(app) {
 		User.get(req.body.username, function(err, user){
 			if(!user){
 				req.flash('error', 'User does not exists!');
-				return res.redirect('/login');
+				return res.redirect('/');
 			}
 			if(user.password != password) {
 				req.flash('error', 'Password Mismatch!');
