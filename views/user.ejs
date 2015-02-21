@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+    <style type="text/css">
+    	body{
+    		padding-top:60px;
+    		padding-bottom: 40px;
+    	}
+    </style>
+    <link href="stylesheets/bootstrap-responsive.css" rel="stylesheet">
+  </head>
+  <body>
+
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+	      	</a>
+	      	<a class="brand" href="/">Home</a>
+	      	<div class="nav-collapse">
+				<ul class="nav">
+					<% if(!user) { %>
+						<li><a href="/login">Login</a></li>
+						<li><a href="/reg">Sign Up</a></li>
+					<% } else { %>
+						<li><a href="/logout">Logout</a></li>
+					<% } %>
+				</ul> 
+			</div>
+	    </div>
+	  </div>
+	</div>
+
+	<div id="container" class="container">
+		
+		<% if (user) { %>
+			<form method="post" action="/post" class="well form-inline center" style="text-align: center;">
+				<input type="text" class="span8" name="post">
+				<button type="submit" class="btn btn-success">Post</button> 
+			</form>
+		<% } %>
+		<h2>User Posts</h2>
+		<% posts.forEach(function(post, index) {
+      		if (index % 3 == 0) { %>
+        		<div class="row">
+    		<%} %>
+			<div class="span9">
+				<p><i>Content : </i><%= post.post %></p>
+				<p><small><i>Timestamp : </i><%= post.time %></small></p>
+				<hr>
+  			</div>
+			<% if (index % 3 == 2) { %>
+    			</div>
+			<% } %>
+		<%}) %>
+		<% if (posts.length % 3 != 0) { %>
+  			</div>
+		<%} %>
+				
+		<hr />
+	</div>
+  </body>
+   <script src="/javascripts/jquery.js"></script>
+   <script src="/javascripts/bootstrap.js"></script>
+</html>
